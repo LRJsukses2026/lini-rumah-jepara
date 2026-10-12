@@ -1,435 +1,262 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lini Rumah Jepara — Katalog Produk Furnitur</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --border: #334155;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --primary: #d97706;
-      --wa-btn: #22c55e;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>Lini Rumah Jepara - Katalog Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --serif:"Cormorant Garamond","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --wa:#25D366;
+}
+:root,[data-theme="dark"]{
+  --bg:#151312; --bg2:#1D1916; --card:#1A1715; --line:rgba(241,230,216,.13);
+  --text:#F1E6D8; --muted:#B1A394; --gold:#CD8F51; --accent:#CD8F51; --accent-ink:#1C1410;
+  --veil:rgba(21,19,18,.86); --hdr:rgba(21,19,18,.82); --logo:#567A60; --ghost:rgba(241,230,216,.07);
+  color-scheme:dark;
+}
+[data-theme="light"]{
+  --bg:#F9F9F8; --bg2:#FFFFFF; --card:#FFFFFF; --line:#E7E5E4;
+  --text:#1C1917; --muted:#78716C; --gold:#292524; --accent:#292524; --accent-ink:#FFFFFF;
+  --veil:rgba(249,249,248,.9); --hdr:rgba(249,249,248,.88); --logo:#292524; --ghost:rgba(28,25,23,.06);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.65;transition:background-color .35s,color .35s}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      padding: 16px;
-      min-height: 100vh;
-    }
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding-inline:22px}
+.sec{padding:60px 0}
+.center{text-align:center}
+.eyebrow{font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:500}
+h2.t{font-size:clamp(2.1rem,6vw,3.3rem);line-height:1.1;margin-top:8px}
 
-    .container { max-width: 1200px; margin: 0 auto; }
+/* Header & Nav */
+.top{position:sticky;top:0;z-index:50;background:var(--hdr);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-family:var(--serif);font-size:1.4rem;font-weight:600}
 
-    header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 0 24px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 24px;
-    }
-    .brand h1 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #fbbf24;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .brand p { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+/* Filter Chips */
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;margin-bottom:24px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:8px 20px;border-radius:999px;border:1px solid var(--line);background:transparent;font-size:.88rem;cursor:pointer}
+.chip.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:500}
 
-    .btn-refresh {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-refresh:hover { background: var(--border); }
+/* Product Grid */
+.grid{display:grid;grid-template-columns:1fr;gap:36px 22px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.grid{grid-template-columns:repeat(3,1fr)}}
 
-    .controls { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
-    .search-input {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: #fff;
-      font-size: 0.95rem;
-    }
-    .search-input:focus { outline: none; border-color: var(--primary); }
+/* Card Product with Gallery Slider */
+.pc{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.slider{position:relative;aspect-ratio:4/5;background:var(--bg2);overflow:hidden}
+.slides{display:flex;width:100%;height:100%;transition:transform .4s ease-in-out}
+.slides img{width:100%;height:100%;object-fit:cover;flex:none}
+.slide-btn{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;border:none;display:grid;place-items:center;z-index:2;cursor:pointer}
+.slide-btn.prev{left:10px}
+.slide-btn.next{right:10px}
+.dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:2}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);transition:background .3s}
+.dot.active{background:var(--gold)}
 
-    .category-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
-    .category-tabs::-webkit-scrollbar { height: 4px; }
-    .category-tabs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.pc .meta{padding:20px;display:grid;gap:8px;text-align:center}
+.pc .cat{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.pc h3{font-size:1.5rem}
+.pc .desc{font-size:.88rem;color:var(--muted)}
+.pc .price{font-weight:600;color:var(--gold);font-size:1.15rem;margin-top:4px}
+.btn-wa{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--accent-ink);padding:10px 20px;border-radius:999px;font-weight:500;margin-top:8px;font-size:.9rem}
 
-    .tab-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
-    .tab-btn.active, .tab-btn:hover {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #fff;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    .product-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .slider-wrap {
-      width: 100%;
-      height: 220px;
-      background: #0b1120;
-      position: relative;
-      overflow: hidden;
-    }
-    .slider-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      cursor: pointer;
-      display: block;
-    }
-    .no-img {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-    .badge-cat {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid var(--border);
-      color: #fbbf24;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 6px;
-      text-transform: uppercase;
-      z-index: 2;
-    }
-
-    .slide-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid var(--border);
-      color: #fff;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      font-weight: bold;
-      z-index: 3;
-      user-select: none;
-    }
-    .slide-btn:hover { background: rgba(0, 0, 0, 0.9); }
-    .slide-prev { left: 8px; }
-    .slide-next { right: 8px; }
-
-    .slide-counter {
-      position: absolute;
-      bottom: 8px;
-      right: 8px;
-      background: rgba(15, 23, 42, 0.85);
-      padding: 2px 7px;
-      border-radius: 10px;
-      font-size: 0.7rem;
-      color: #fff;
-      font-weight: 600;
-      z-index: 2;
-    }
-
-    .product-body {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-    .product-name {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: #fff;
-    }
-    .product-desc {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.4;
-      margin-bottom: 14px;
-      flex: 1;
-    }
-    .product-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .product-price {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #38bdf8;
-    }
-    .btn-wa {
-      background: var(--wa-btn);
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 8px 12px;
-      border-radius: 6px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .modal-zoom {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.88);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    .modal-zoom img { max-width: 95%; max-height: 85vh; border-radius: 8px; }
-    .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 25px;
-      font-size: 2rem;
-      color: #fff;
-      cursor: pointer;
-    }
-    #loading { text-align: center; padding: 40px; color: var(--muted); }
-  </style>
+/* Loading & Empty State */
+.loading{text-align:center;padding:40px;color:var(--muted);font-size:1.1rem}
+</style>
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <div class="brand">
-        <h1>🛋️ Lini Rumah Jepara</h1>
-        <p>Katalog Koleksi Furnitur & Mebel Kayu Solid</p>
-      </div>
-      <button class="btn-refresh" onclick="fetchCatalog()">🔄 Segarkan Data</button>
-    </header>
+<header class="top">
+  <div class="wrap bar">
+    <div class="brand">Lini Rumah Jepara</div>
+  </div>
+</header>
 
-    <div class="controls">
-      <input type="text" id="searchInput" class="search-input" placeholder="Cari produk, kategori, atau spesifikasi..." oninput="filterAndRender()">
-      <div class="category-tabs" id="categoryTabs"></div>
-    </div>
-
-    <div id="loading">Memuat katalog dari Google Sheets...</div>
-    <div id="productGrid" class="product-grid"></div>
+<main class="wrap sec">
+  <div class="center" style="margin-bottom: 32px;">
+    <span class="eyebrow">Katalog Koleksi</span>
+    <h2 class="t">Mebel & Furnitur Terpilih</h2>
   </div>
 
-  <div class="modal-zoom" id="modalZoom" onclick="closeZoom()">
-    <span class="modal-close">&times;</span>
-    <img id="zoomImg" src="" alt="Detail Produk">
+  <!-- Filter Kategori -->
+  <div class="chips" id="categoryChips">
+    <button class="chip active" onclick="filterCategory('semua', this)">Semua</button>
   </div>
 
-  <script>
-    // MASUKKAN LINK CSV SHEET KATALOG DI SINI:
-    const KATALOG_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSvwi7Zrze4f0LmvlMAVnG40msfXAm3PjbO1fS7OgjL7lqCQ55zaEZL6VeK-imYviC37wMgysBdMJs_/pub?output=csv";
+  <!-- Container Produk -->
+  <div class="grid" id="productGrid">
+    <div class="loading">Memuat produk dari Spreadsheet...</div>
+  </div>
+</main>
 
-    // NOMOR WA ADMIN KATALOG:
-    const NO_WHATSAPP = "6282133030062";
+<script>
+// ==========================================
+// 1. PENGATURAN GOOGLE SHEETS
+// ==========================================
+// Masukkan ID Spreadsheet Anda di bawah ini:
+const SHEET_ID = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSvwi7Zrze4f0LmvlMAVnG40msfXAm3PjbO1fS7OgjL7lqCQ55zaEZL6VeK-imYviC37wMgysBdMJs_/pub?output=csv";
+const WA_NUMBER = "6282133030062"; // Nomor WhatsApp Anda (Format Internasional tanpa +)
 
-    let allProducts = [];
-    let selectedCategory = "Semua";
+const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-    async function fetchCatalog() {
-      const loader = document.getElementById('loading');
-      loader.style.display = 'block';
+let allProducts = [];
 
-      try {
-        if (!KATALOG_SHEET_CSV_URL.includes("TEMPEL_LINK")) {
-          const res = await fetch(KATALOG_SHEET_CSV_URL + '&_t=' + new Date().getTime());
-          const text = await res.text();
-          allProducts = parseCatalogCSV(text);
-          setupCategories();
-        }
-      } catch (err) {
-        console.error("Gagal memuat:", err);
-      }
+// ==========================================
+// 2. FUNGSI AMBIL DATA SHEET
+// ==========================================
+async function fetchSheetData() {
+  try {
+    const res = await fetch(SHEET_URL);
+    const text = await res.text();
+    
+    // Parsing JSON dari format response Google Visualization API
+    const json = JSON.parse(text.substring(47, text.length - 2));
+    const rows = json.table.rows;
 
-      loader.style.display = 'none';
-      filterAndRender();
-    }
+    allProducts = rows.map((row, index) => {
+      const c = row.c;
+      // Memisahkan URL foto berdasarkan koma
+      const photos = c[2]?.v ? c[2].v.split(',').map(url => url.trim()) : [];
+      
+      return {
+        id: index,
+        nama: c[0]?.v || "Tanpa Nama",
+        kategori: c[1]?.v || "Lainnya",
+        foto: photos,
+        harga: c[3]?.v || "Hubungi Kami",
+        deskripsi: c[4]?.v || ""
+      };
+    });
 
-    function parseCatalogCSV(text) {
-      const lines = text.trim().split('\n');
-      const list = [];
+    renderCategories();
+    renderProducts(allProducts);
+  } catch (err) {
+    console.error("Gagal mengambil data:", err);
+    document.getElementById("productGrid").innerHTML = 
+      `<div class="loading" style="color:#e5806f;">Gagal memuat data produk. Pastikan ID Spreadsheet sudah benar dan akses file disetel ke 'Siapa saja yang memiliki link'.</div>`;
+  }
+}
 
-      for (let i = 1; i < lines.length; i++) {
-        const col = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.trim().replace(/^"\vert{}"$/g, ''));
-        
-        if (col.length >= 2 && col[1]) {
-          const rawPhotos = col[4] || "";
-          const photoArray = rawPhotos.split(',').map(p => p.trim()).filter(Boolean);
+// ==========================================
+// 3. FUNGSI RENDER KATEGORI
+// ==========================================
+function renderCategories() {
+  const categories = ["semua", ...new Set(allProducts.map(p => p.kategori))];
+  const chipsContainer = document.getElementById("categoryChips");
+  
+  chipsContainer.innerHTML = categories.map(cat => `
+    <button class="chip ${cat === 'semua' ? 'active' : ''}" onclick="filterCategory('${cat}', this)">
+      ${cat.charAt(0).toUpperCase() + cat.slice(1)}
+    </button>
+  `).join('');
+}
 
-          list.push({
-            id: i,
-            category: col[0] || "Lainnya",
-            name: col[1] || "Produk Furnitur",
-            desc: col[2] || "-",
-            price: col[3] || "Hubungi Kami",
-            photos: photoArray,
-            currentSlide: 0
-          });
-        }
-      }
-      return list;
-    }
+function filterCategory(cat, btn) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
 
-    function setupCategories() {
-      const tabsContainer = document.getElementById('categoryTabs');
-      const categories = ["Semua", ...new Set(allProducts.map(p => p.category).filter(Boolean))];
+  if (cat === 'semua') {
+    renderProducts(allProducts);
+  } else {
+    const filtered = allProducts.filter(p => p.kategori === cat);
+    renderProducts(filtered);
+  }
+}
 
-      tabsContainer.innerHTML = categories.map(cat => `
-        <button class="tab-btn ${cat === selectedCategory ? 'active' : ''}" onclick="selectCategory('${cat}')">
-          ${cat}
-        </button>
-      `).join('');
-    }
+// ==========================================
+// 4. FUNGSI RENDER PRODUK & SLIDER FOTO
+// ==========================================
+function renderProducts(products) {
+  const container = document.getElementById("productGrid");
+  
+  if (products.length === 0) {
+    container.innerHTML = `<div class="loading">Tidak ada produk ditemukan.</div>`;
+    return;
+  }
 
-    function selectCategory(cat) {
-      selectedCategory = cat;
-      setupCategories();
-      filterAndRender();
-    }
+  container.innerHTML = products.map(p => {
+    // Generate Slide Gambar
+    const slideImgs = p.foto.map(url => `<img src="${url}" alt="${p.nama}">`).join('');
+    
+    // Generate Dots Indicator
+    const dots = p.foto.length > 1 ? 
+      `<div class="dots">${p.foto.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}"></span>`).join('')}</div>` : '';
 
-    function filterAndRender() {
-      const search = document.getElementById('searchInput').value.toLowerCase();
-      const grid = document.getElementById('productGrid');
-      grid.innerHTML = '';
+    // Tombol Navigasi Slider (jika foto > 1)
+    const navBtns = p.foto.length > 1 ? `
+      <button class="slide-btn prev" onclick="moveSlide(${p.id}, -1)">&#10094;</button>
+      <button class="slide-btn next" onclick="moveSlide(${p.id}, 1)">&#10095;</button>
+    ` : '';
 
-      const filtered = allProducts.filter(item => {
-        const matchSearch = item.name.toLowerCase().includes(search) || 
-                            item.desc.toLowerCase().includes(search) ||
-                            item.category.toLowerCase().includes(search);
-        const matchCat = (selectedCategory === "Semua") || (item.category === selectedCategory);
-        return matchSearch && matchCat;
-      });
+    const waText = encodeURIComponent(`Halo, saya tertarik dengan produk: ${p.nama}`);
 
-      if (filtered.length === 0) {
-        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--muted);">Tidak ada produk yang cocok.</div>';
-        return;
-      }
-
-      grid.innerHTML = filtered.map(item => {
-        const pesanWA = encodeURIComponent(`Halo Lini Rumah Jepara, saya tertarik dengan produk "${item.name}".`);
-        const linkWA = `https://wa.me/${NO_WHATSAPP}?text=${pesanWA}`;
-        const hasMultiple = item.photos.length > 1;
-        const currentSrc = item.photos[item.currentSlide] || "";
-
-        return `
-          <div class="product-card" id="card-${item.id}">
-            <div class="slider-wrap">
-              <span class="badge-cat">${item.category}</span>
-              
-              ${item.photos.length > 0 
-                ? `<img src="${currentSrc}" alt="${item.name}" class="slider-img" onclick="openZoom('${currentSrc}')" id="img-${item.id}">` 
-                : `<div class="no-img">📷 Foto belum ada</div>`
-              }
-
-              ${hasMultiple ? `
-                <button class="slide-btn slide-prev" onclick="changeSlide(${item.id}, -1)">❮</button>
-                <button class="slide-btn slide-next" onclick="changeSlide(${item.id}, 1)">❯</button>
-                <div class="slide-counter" id="counter-${item.id}">${item.currentSlide + 1}/${item.photos.length}</div>
-              ` : ''}
-            </div>
-
-            <div class="product-body">
-              <h3 class="product-name">${item.name}</h3>
-              <p class="product-desc">${item.desc}</p>
-              <div class="product-footer">
-                <span class="product-price">${item.price}</span>
-                <a href="${linkWA}" target="_blank" class="btn-wa">💬 Tanya WA</a>
-              </div>
-            </div>
+    return `
+      <div class="pc" id="product-${p.id}">
+        <div class="slider">
+          <div class="slides" id="slides-${p.id}">
+            ${slideImgs}
           </div>
-        `;
-      }).join('');
-    }
+          ${navBtns}
+          ${dots}
+        </div>
+        <div class="meta">
+          <span class="cat">${p.kategori}</span>
+          <h3>${p.nama}</h3>
+          <p class="desc">${p.deskripsi}</p>
+          <div class="price">${p.harga}</div>
+          <a href="https://wa.me/${WA_NUMBER}?text=${waText}" target="_blank" class="btn-wa">Tanya Via WhatsApp</a>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
 
-    function changeSlide(productId, step) {
-      const product = allProducts.find(p => p.id === productId);
-      if (!product || product.photos.length <= 1) return;
+// ==========================================
+// 5. LOGIKA SLIDER BEBERAPA FOTO
+// ==========================================
+const slideIndexes = {};
 
-      product.currentSlide = (product.currentSlide + step + product.photos.length) % product.photos.length;
-      
-      const imgEl = document.getElementById(`img-${productId}`);
-      const counterEl = document.getElementById(`counter-${productId}`);
-      
-      if (imgEl) {
-        imgEl.src = product.photos[product.currentSlide];
-        imgEl.setAttribute('onclick', `openZoom('${product.photos[product.currentSlide]}')`);
-      }
-      if (counterEl) {
-        counterEl.innerText = `${product.currentSlide + 1}/${product.photos.length}`;
-      }
-    }
+function moveSlide(productId, direction) {
+  if (!(productId in slideIndexes)) slideIndexes[productId] = 0;
+  
+  const product = allProducts.find(p => p.id === productId);
+  const totalSlides = product.foto.length;
+  
+  slideIndexes[productId] += direction;
 
-    function openZoom(src) {
-      if (!src) return;
-      document.getElementById('zoomImg').src = src;
-      document.getElementById('modalZoom').style.display = 'flex';
-    }
+  if (slideIndexes[productId] >= totalSlides) slideIndexes[productId] = 0;
+  if (slideIndexes[productId] < 0) slideIndexes[productId] = totalSlides - 1;
 
-    function closeZoom() {
-      document.getElementById('modalZoom').style.display = 'none';
-    }
+  const slidesEl = document.getElementById(`slides-${productId}`);
+  const cardEl = document.getElementById(`product-${productId}`);
+  const dots = cardEl.querySelectorAll('.dot');
 
-    window.addEventListener('DOMContentLoaded', fetchCatalog);
-  </script>
+  // Pergeseran slide
+  slidesEl.style.transform = `translateX(-${slideIndexes[productId] * 100}%)`;
+
+  // Update indikator titik
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle('active', idx === slideIndexes[productId]);
+  });
+}
+
+// Jalankan saat halaman dibuka
+fetchSheetData();
+</script>
 </body>
 </html>
